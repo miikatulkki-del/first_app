@@ -1,0 +1,40 @@
+{% extends 'base.html'%}
+
+{% block head %}
+<title> Tällainen hauska sovellus</title>
+{% endblock %} 
+
+
+{% block body%}
+<div class="content">
+    <h1> Hauska mukava sovellus </h1>
+
+    {% if tasks | length == 0 %}
+    <h3>There are no tasks</h3>
+    {% else %}
+    <table>
+        <tr>
+            <th> <img src="static\IMG_2418.JPEG" style="width: 150px; height: auto;" alt="kuva"> </th>
+            <th> <img src="static\kalenteri.jpg" style="width: 90px; height: auto;" alt="kuva"> </th>
+            <th> <img src="static\hiiri.jpg" style="width: 150px; height: auto;" alt="kuva"> </th>
+        </tr>
+        {% for task in tasks %}
+            <tr>
+                <td>{{task.content}}</td>
+                <td>{{task.created.strftime("%Y-%m-%d")}}</td>
+                <td> 
+                    <a href="/delete/{{task.id}}"><img src="static\tuhoaja.jpg" style="width: 50px; height: auto;" alt="kuva"></a>
+                    <br/>
+                    <a href="/edit/{{task.id}}"><img src="static\editointi.jpg" style="width: 50px; height: auto;" alt="kuva"></a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+    <form action="/" method="POST">
+        <input type="text" name = "content" id = "content" />
+        <input type="submit" value="Lisää homma" id = "btn_add" />
+    </form>
+</div>
+
+{% endblock %}
