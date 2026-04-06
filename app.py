@@ -25,6 +25,9 @@ class MyTask(db.Model):
     def __repr__(self) -> str:
         return f"Task {self.id}"
 
+with app.app_context():
+    db.create_all()
+
 #Home Page
 @app.route("/",methods=["POST","GET"])
 def index():
@@ -108,7 +111,5 @@ def edit(id:int):
 
 kokonaisaika = 0
 
-if __name__ in "__main__":
-    with app.app_context():
-        db.create_all()
+if __name__ == "__main__":
     app.run(debug=True) 
